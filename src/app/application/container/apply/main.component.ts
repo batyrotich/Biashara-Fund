@@ -278,15 +278,15 @@ export class ApplicationComponent implements OnInit {
   ngOnInit(){
 
     this.personalDetails =this.formBuilder.group({
-      fullName: ['',],
-      identificationNumber:['',],
-      gender:['', ],
-      other_gender:['',],
-      disabilityStatus:['',],
-      email:['',],
-      phoneNumber:['',],
-      passportPhoto:['',],
-      nationalIDPhoto:['',],
+      fullName: ['', Validators.required, Validators.minLength(5)],
+      identificationNumber:['', Validators.required],
+      gender:['','True', Validators.required],
+      other_gender:['', Validators.required],
+      disabilityStatus:['', 'True',Validators.required],
+      email:['', Validators.required],
+      phoneNumber:['', Validators.required],
+      passportPhoto:['', Validators.required],
+      nationalIDPhoto:['', Validators.required],
     });
 
     this.personalDetails.get('gender')?.valueChanges.subscribe(value=>{
@@ -296,30 +296,30 @@ export class ApplicationComponent implements OnInit {
     });
 
     this.businessIndivual=this.formBuilder.group({
-      businessName:['',],
-      isbusinessRegistered:['',],
+      businessName:['', Validators.required],
+      isbusinessRegistered:['', Validators.required],
       registrationCertificate:null,
-      explainWhy:['',],
-      subcounty:['',],
-      ward:['',],
-      building:['',],
-      street:['',],
-      landmark:['',],
-      businessSector:['',],
-      natureofBusiness:['',],
-      numbofEmployees:['',],
-      lengthofOperations:['',],
-      challenges:['',],
-      otherChallenges:['',],
-      awareofProgram:['',],
-      sourceofCapital:['',],
-      capitalisAdequate:['',],
-      marketingProducts:['',],
-      targetMarket:['',],
-      participatedintradefair:['',],
-      tradefairParticipation:['',],
-      capacityBuildingTraining:['',],
-      capacityTrainingParticipation:['',]
+      explainWhy:['', Validators.required],
+      subcounty:['', Validators.required],
+      ward:['', Validators.required],
+      building:['', Validators.required],
+      street:['', Validators.required],
+      landmark:['', Validators.required],
+      businessSector:['', Validators.required],
+      natureofBusiness:['', Validators.required],
+      numbofEmployees:['', Validators.required],
+      lengthofOperations:['', Validators.required],
+      challenges:['', Validators.required],
+      otherChallenges:['', Validators.required],
+      awareofProgram:['', Validators.required],
+      sourceofCapital:['', Validators.required],
+      capitalisAdequate:['', Validators.required],
+      marketingProducts:['', Validators.required],
+      targetMarket:['', Validators.required],
+      participatedintradefair:['',Validators.required],
+      tradefairParticipation:['', Validators.required],
+      capacityBuildingTraining:['', Validators.required],
+      capacityTrainingParticipation:['', Validators.required]
     });
 
 
@@ -353,12 +353,12 @@ export class ApplicationComponent implements OnInit {
 
 
     this.businessGroup=this.formBuilder.group({
-      isGroupRegistered:['',],
-      groupName:['',],
-      year_registered:['',],
-      chairpersonsContact:['',],
-      numberofGroupmemb:['',],
-      listOfGroupmembers:['',],
+      isGroupRegistered:['', Validators.required],
+      groupName:['', Validators.required],
+      year_registered:['', Validators.required],
+      chairpersonsContact:['', Validators.required],
+      numberofGroupmemb:['', Validators.required],
+      listOfGroupmembers:['', Validators.required],
       groupConsitution:null,
       groupRegCert:null,
 
