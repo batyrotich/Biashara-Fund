@@ -1,0 +1,407 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.row{
+  /* background-color: black;
+  min-height: 100vh;
+  opacity: 0.7;
+  padding-bottom: 30px; */
+
+  font-family: Roboto,"Helvetica Neue", sans-serif; 
+   background: url('/assets/bg-image-two.jpg');
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  background-repeat: repeat; 
+ 
+  /* background-color: #003d1e; */
+
+  
+}
+.form-container-wrapper{
+   background-color: #003d1e;
+  /* background-color:#003d1e; */
+  min-height: 100vh;
+  opacity: 0.9;
+  padding-bottom: 30px;
+
+}
+.fieldset-container-wrapper{
+ /* background-color: white; */
+ 
+}
+
+
+
+
+.nav{
+  background-color: white;
+  /* opacity: 0.4; */
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+ 
+}
+.container{
+  max-width: 1140px;
+  /* padding-top: 10px; */
+}
+.nairobi-image-container{
+  margin-left: 20px;
+  padding: 8px;
+}
+
+.venturepal-image-container{
+  padding: 8px;
+ 
+}
+
+
+.title{
+  /* color: #FBE116; */
+  color: #FBE116;
+  padding: 20px;
+  font-weight: bolder;
+  text-align: center;
+  /* text-transform: uppercase; */
+}
+.titleContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#msform {
+  text-align: center;
+  position: relative;
+  padding-top: 20px;
+ 
+  /* margin-top: 30px; */
+
+}
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  /* box-sizing: border-box; */
+  width: 80%;
+  margin: 0 10%;
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+/*inputs*/
+
+
+
+input[type="file"]{
+  border: none;
+}
+
+#msform input, #msform textarea{
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  /* color: #2C3E50; */
+  color: black;
+  font-size: 13px;
+}
+
+
+
+#msform input:focus, #msform textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid orange;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+  -webkit-transition: All 0.5s ease-in;
+  -moz-transition: All 0.5s ease-in;
+  -o-transition: All 0.5s ease-in;
+}
+
+/* radio buttons */
+mat-radio-group{
+  margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+/*buttons*/
+#msform .action-button {
+  width: 100px;
+  background: #FBE116;
+  font-weight: bold;
+  color: white;
+  /* color: black; */
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .action-submit{
+  width: 100px;
+  background: green;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+
+}
+
+#msform .action-submit:hover, #msform .action-submit:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #e6e5e5;
+}
+
+
+
+
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #e6e5e5;
+}
+#msform .action-button-previous {
+  width: 100px;
+  background: grey;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+}
+/*headings*/
+.fs-title {
+  font-size: 18px;
+  /* text-transform: uppercase; */
+  /* color: #2C3E50; */
+  color: #003d1e;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 14px;
+  /* color: #666; */
+  color: #003d1e;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+/*progressbar*/
+#progressbar {
+  margin-bottom: 20px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+#progressbar li {
+  list-style-type: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 33.33%;
+  float: left;
+  position: relative;
+  letter-spacing: 1px;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 24px;
+  height: 24px;
+  line-height: 26px;
+  display: block;
+  font-size: 12px;
+  /* color: #333; */
+  color: lightgray;
+  background: white;
+  border-radius: 25px;
+  margin: 0 auto 10px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+  background: #FBE116;
+  color: white;
+}
+#progressbar li.inactive:before{
+  background: burlywood;
+  color: #000;
+}
+fieldset {
+ /* for chrome and safari*/
+-webkit-animation-duration: .25ms;-webkit-animation-name: slidein;
+ /*for firefox*/
+-moz-animation-duration: 1s;-moz-animation-name: slidein;
+ /* for opera*/
+ -o-animation-duration: 1s;-o-animation-name: slidein;
+/* Standard syntax*/
+    animation-duration: 1s;animation-name: slidein;
+}
+ @-webkit-keyframes slidein {
+      from { margin-right:100%;width:300%;}
+      to { margin-right: 0%;width: 100%;           }
+}
+@-moz-keyframes slidein {
+         from {
+             margin-left: 100%;width: 300%;
+         }
+         to {
+             margin-left: 0%; width: 100%;
+         }
+  }
+@-o-keyframes slidein {
+         from {
+             margin-left: 100%;width: 300%;
+         }
+         to {
+             margin-left: 0%;width: 100%;
+         }
+}
+@keyframes slidein {
+         from {
+             margin-left: 100%;width: 300%;
+         }
+         to {
+             margin-left: 0%;width: 100%;
+         }
+}
+
+
+/* styling the required fields when input field is empty */
+.fieldInputEmpty{
+   color: red;
+   font-size: 14px;
+   font-weight: bold;
+   /* padding: 20px; */
+   /* text-align: left; */
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+
+
+
+/* styling the radio buttons to align vertically */
+.gender{
+
+}
+.radio-group-options{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+}
+.mat-radio-button {
+  outline: none !important;
+}
+.mat-radio-button:focus{
+  outline: none !important;
+}
+.mat-radio-ripple {
+  display: none !important;
+}
+
+.radio-button-title{
+  font-weight: normal;
+  font-size: 14px;
+  color: #003d1e;
+  margin-bottom: 20px;
+  line-height: 0.6;
+  margin-top: 10px;
+  text-align: left;
+
+}
+#file-upload{
+  border: none;
+}
+
+
+/* styling mat form field */
+.matFormField{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* checkboxes */
+.checkboxContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.matFormInput{
+  padding: 15px;
+  /* border: 1px solid #ccc; */
+  border-radius: 0px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  /* color: #2C3E50; */
+  color: black;
+  font-size: 13px;
+}
+
+html, body { height: 100%; }
+
+
+
+
+
+
+
+.ng-select-material{
+  /* @import "../node_modules/@ng-select/ng-select/themes/default.theme.css"; */
+  text-align: left;
+ 
+}
+
+
+
