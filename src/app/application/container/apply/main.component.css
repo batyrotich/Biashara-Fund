@@ -30,10 +30,10 @@
   padding-bottom: 30px;
 
 }
-.fieldset-container-wrapper{
+/* .fieldset-container-wrapper{
  /* background-color: white; */
  
-}
+/* } */ */
 
 
 
@@ -109,6 +109,14 @@ input[type="file"]{
   border: none;
 }
 
+.error-message{
+  position: absolute;
+  top: 25px;
+  color: red;
+}
+.error-border {
+  border: 2px solid red !important;
+}
 #msform input, #msform textarea{
   padding: 15px;
   border: 1px solid #ccc;
@@ -327,9 +335,9 @@ fieldset {
 
 
 /* styling the radio buttons to align vertically */
-.gender{
+/* .gender{
 
-}
+} */
 .radio-group-options{
   display: flex;
   flex-direction: column;

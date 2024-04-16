@@ -28,7 +28,7 @@
   <div class="col-md-12 col-md-offset-3  ">
     <div class="form-container-wrapper">
       <form [formGroup]="personalDetails" id="msform">
-        
+
           <!-- progressbar -->
 
           <ul id="progressbar">
@@ -41,10 +41,17 @@
 
 
 
+
           <fieldset *ngIf="step ==1" class="fieldset-container-wrapper">
               <h2 class="fs-title">Personal Details</h2>
-              <input type="text" formControlName="fullName" placeholder="Full Names" />
-              <input type="number" formControlName="identificationNumber" placeholder="Identification Number" />
+              <input type="text" formControlName="fullName" placeholder="Full Names" required [ngClass]="{ 'error-border': personal_step && personalDetails.controls['fullName'].errors }"/>
+              <div *ngIf="personal_step && personalDetails.controls['fullName'].errors" class="error-message">
+                <div *ngIf="personal['fullName'].errors?.['required']" class="error-text">Name is required</div>
+            </div>
+              <input type="number" formControlName="identificationNumber" placeholder="Identification Number" [ngClass]="{ 'error-border': personal_step && personalDetails.controls['fullName'].errors }" />
+              <div *ngIf="personal_step && personalDetails.controls['identificationNumber'].errors">
+                <div *ngIf="personal['identificationNumber'].errors?.['required']" class="error-text">National ID Number is required</div>
+            </div>
               <div class="gender">
                   <h4 class="radio-button-title">Gender</h4>
                   <mat-radio-group formControlName="gender" class="radio-group-options" aria-label="Select an option">
@@ -52,35 +59,52 @@
                       <mat-radio-button  class="mat-radio-button" value="female">Female</mat-radio-button>
                       <mat-radio-button  class="mat-radio-button" value="other">Other</mat-radio-button>
                   </mat-radio-group>
-          
+
+
                   <div class="matFormInput" *ngIf="personalDetails.get('gender')?.value === 'other'">
                       <input formControlName="other_gender" placeholder="">
                   </div>
+                  <div *ngIf="personal_step && personalDetails.controls['gender'].errors">
+                    <div *ngIf="personal['gender'].errors?.['required']" class="error-text">Gender is required</div>
+                </div>
               </div>
 
 
-          
-          
+
+
               <div class="disability-status">
                   <h4 class="radio-button-title">Disability Status</h4>
-                  <mat-radio-group formControlName="disabilityStatus" class="radio-group-options" aria-label="Select an option">
+                  <mat-radio-group formControlName="disabilityStatus" class="radio-group-options" aria-label="Select an option" >
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
+
                   </mat-radio-group>
-              </div>
-          
-              <input type="email" formControlName="email" placeholder="Email" />
-              <input type="number" formControlName="phoneNumber" placeholder="Phone Number" />
-          
-              <div class="photo-upload">
-                  <h4 class="fs-subtitle radio-button-title">Upload your passport photo</h4>
-                  <input formControlName="passportPhoto" class="file-upload" type="file" (change)="handleFileupload($event,'passportPhoto')">
-          
-                  <h4 class="fs-subtitle radio-button-title">Upload a copy of your National ID</h4>
-                  <input formControlName="nationalIDPhoto" class="file-upload" type="file" (change)="handleFileupload($event,'nationalIDPhoto')">
+                  <div *ngIf="personal_step && personalDetails.controls['disabilityStatus'].errors">
+                    <div *ngIf="personal['disabilityStatus'].errors?.['required']" class="error-text">Disability Status is required</div>
+                </div>
               </div>
 
-              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/> 
+              <input type="email" formControlName="email" placeholder="Email" [ngClass]="{ 'error-border': personal_step && personalDetails.controls['email'].errors }"/>
+
+              <input type="number" formControlName="phoneNumber" placeholder="Phone Number" [ngClass]="{ 'error-border': personal_step && personalDetails.controls['phoneNumber'].errors }"/>
+              <div *ngIf="personal_step && personalDetails.controls['phoneNumber'].errors">
+                <div *ngIf="personal['phoneNumber'].errors?.['required']" class="error-text">Phone number is required</div>
+            </div>
+              <div class="photo-upload">
+                  <h4 class="fs-subtitle radio-button-title">Upload your passport photo</h4>
+                  <input formControlName="passportPhoto" class="file-upload" type="file" (change)="handleFileupload($event,'passportPhoto')" [ngClass]="{ 'error-border': personal_step && personalDetails.controls['passportPhoto'].errors }">
+                  <div *ngIf="personal_step && personalDetails.controls['passportPhoto'].errors">
+                    <div *ngIf="personal['passportPhoto'].errors?.['required']" class="error-text">Passport Photo is required</div>
+                </div>
+
+                  <h4 class="fs-subtitle radio-button-title">Upload a copy of your National ID</h4>
+                  <input formControlName="nationalIDPhoto" class="file-upload" type="file" (change)="handleFileupload($event,'nationalIDPhoto')" [ngClass]="{ 'error-border': personal_step && personalDetails.controls['nationalIDPhoto'].errors }">
+                  <div *ngIf="personal_step && personalDetails.controls['nationalIDPhoto'].errors">
+                    <div *ngIf="personal['nationalIDPhoto'].errors?.['required']" class="error-text">National ID Photo is required</div>
+                </div>
+                </div>
+
+              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
 
           </fieldset>
           </form>
@@ -92,42 +116,54 @@
           <fieldset *ngIf="step ==2">
               <h2 class="fs-title">Business Specifics (Individual)</h2>
               <!-- <h4 class="fs-subtitle radio-button-title">What is your Business Name</h4> -->
-              <input type="text" formControlName="businessName" placeholder="Business Name">
-          
+              <input type="text" formControlName="businessName" placeholder="Business Name" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['businessName'].errors }">
+              <div *ngIf="businessIndividual_step && businessIndivual.controls['businessName'].errors">
+                <div *ngIf="address['businessName'].errors?.['required']" class="error-text" >Name of the business is required</div>
+            </div>
               <div class="businessRegisteration">
                   <h4 class="fs-subtitle radio-button-title">Is your business registered</h4>
+
                   <mat-radio-group formControlName="isbusinessRegistered" class="radio-group-options"
                       aria-label="Select an option">
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['isbusinessRegistered'].errors">
+                    <div *ngIf="address['isbusinessRegistered'].errors?.['required']" class="error-text" >Business registration status is required</div>
+                </div>
               </div>
-              
 
-      
-          
+
+
+
               <div class="registerationCertificate"  *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'yes'">
                   <h4 class="fs-subtitle radio-button-title">If yes attach the certificate of registration</h4>
-                  <input formControlName="registrationCertificate" class="file-upload" type="file" (change)="handleFileupload($event,'registrationCertificate')">
+                  <input formControlName="registrationCertificate" class="file-upload" type="file" (change)="handleFileupload($event,'registrationCertificate')" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['registrationCertificate'].errors }">
                   </div>
+                  <!-- <div *ngIf="businessIndividual_step && businessIndivual.controls['registrationCertificate'].errors">
+                    <div *ngIf="address['registrationCertificate'].errors?.['required']" class="error-text" >Business registration status is required</div>
+                </div> -->
 
               <div class="explainwhy" *ngIf="businessIndivual.get('isbusinessRegistered')?.value === 'no'" >
                   <h4 class="fs-subtitle radio-button-title">If no explain why</h4>
-                  <input formControlName="explainWhy" type="text" placeholder="">
+                  <input formControlName="explainWhy" type="text" placeholder="" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['explainWhy'].errors }">
+                  <!-- <div *ngIf="businessIndividual_step && businessIndivual.controls['explainWhy'].errors">
+                    <div *ngIf="address['explainWhy'].errors?.['required']" class="error-text" >Explain why business not registered required</div>
+                </div> -->
               </div>
-          
+
               <div class="businessLocation">
                   <h4 class="fs-subtitle radio-button-title">What is your Business Location?</h4>
 
 
-                  <!-- <input formControlName="subcounty" type="text" placeholder="Sub County">
-                  <input formControlName="ward" type="text" placeholder="Ward"> -->
-                  <ng-select formControlName="subcounty" [items]="SubCountiesList" bindLabel="label" bindValue="value" placeholder="Select your SubCounty"></ng-select>
 
+                  <ng-select formControlName="subcounty" [items]="SubCountiesList" bindLabel="label" bindValue="value" placeholder="Select your SubCounty" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['explainWhy'].errors }"></ng-select>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['subcounty'].errors">
+                    <div *ngIf="address['subcounty'].errors?.['required']" class="error-text" >Subcounty required</div>
+                </div>
                   <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti North'">
                     <ng-select formControlName="ward" [items]="DagorettiNorthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                   </div>
-
                   <div *ngIf="businessIndivual.controls['subcounty'].value==='Dagoretti South'">
                     <ng-select formControlName="ward" [items]="DagorettiSouthWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                   </div>
@@ -192,15 +228,27 @@
                   <div *ngIf="businessIndivual.controls['subcounty'].value==='Mathare'">
                     <ng-select formControlName="ward" [items]="MathareWardsList" bindLabel="label" bindValue="value" placeholder="Select your Ward"></ng-select>
                   </div>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['ward'].errors">
+                    <div *ngIf="address['ward'].errors?.['required']" class="error-text" >Ward is required</div>
+                </div>
 
 
 
 
-                  <input formControlName="building" type="text" placeholder="Building">
-                  <input formControlName="street" type="text" placeholder="Street">
-                  <input formControlName="landmark" type="text" placeholder="Landmark">
+                  <input formControlName="building" type="text" placeholder="Building"  [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['building'].errors }">
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['building'].errors">
+                    <div *ngIf="address['building'].errors?.['required']" class="error-text" >Building is required</div>
+                </div>
+                  <input formControlName="street" type="text" placeholder="Street"  [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['street'].errors }">
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['street'].errors">
+                    <div *ngIf="address['street'].errors?.['required']" class="error-text" >Street is required</div>
+                </div>
+                  <input formControlName="landmark" type="text" placeholder="Landmark"  [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['landmark'].errors }">
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['landmark'].errors">
+                    <div *ngIf="address['landmark'].errors?.['required']" class="error-text" >Landmark is required</div>
+                </div>
               </div>
-          
+
               <div class="businessSector">
                   <h4 class="fs-subtitle radio-button-title">Sector of the business</h4>
                   <mat-radio-group formControlName="businessSector" class="radio-group-options" aria-label="Select an option">
@@ -209,21 +257,31 @@
                       <mat-radio-button value="service">Service</mat-radio-button>
                       <mat-radio-button value="juakali">Juakali/cottage</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['businessSector'].errors">
+                    <div *ngIf="address['businessSector'].errors?.['required']" class="error-text" >Business sector is required</div>
+                </div>
                   <div class="specifyBusiness" >
                       <h4 class="fs-subtitle radio-button-title">What is the nature of the business (Specify)?</h4>
-                      <input formControlName="natureofBusiness" type="text" placeholder="">
+                      <input formControlName="natureofBusiness" type="text" placeholder="" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['natureofBusiness'].errors }">
+                      <div *ngIf="businessIndividual_step && businessIndivual.controls['natureofBusiness'].errors">
+                        <div *ngIf="address['natureofBusiness'].errors?.['required']" class="error-text" >Specify the nature ofthe businness is required</div>
+                    </div>
                   </div>
-                  
+
+
               </div>
-          
+
               <div class="employees">
                   <h4 class="fs-subtitle radio-button-title">Number of employees</h4>
                   <mat-radio-group formControlName="numbofEmployees" class="radio-group-options" aria-label="Select an option">
                       <mat-radio-button value="1-10">1-10</mat-radio-button>
                       <mat-radio-button value="11-50">11-50</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['numbofEmployees'].errors">
+                    <div *ngIf="address['numbofEmployees'].errors?.['required']" class="error-text" >Number of employees is required</div>
+                </div>
               </div>
-          
+
               <div class="businessOperation">
                   <h4 class="fs-subtitle radio-button-title">How long has your business been in operation?</h4>
                   <mat-form-field class="matFormField">
@@ -236,8 +294,11 @@
                           <mat-option value="3 Years and Above">3 Years and Above</mat-option>
                       </mat-select>
                   </mat-form-field>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['lengthofOperations'].errors">
+                    <div *ngIf="address['lengthofOperations'].errors?.['required']" class="error-text" >Length of operation of the businesss is required</div>
+                </div>
               </div>
-          
+
               <div class="businessChallenges">
                       <div class="challenges" >
                           <h4 class="fs-subtitle radio-button-title">What are the primary challenges your business currently
@@ -248,14 +309,20 @@
                               <mat-radio-button value="Inadequate business/ entrepreneur skills">Inadequate business/ entrepreneur skills</mat-radio-button>
                               <mat-radio-button value="other">Other</mat-radio-button>
                           </mat-radio-group>
+                          <div *ngIf="businessIndividual_step && businessIndivual.controls['challenges'].errors">
+                            <div *ngIf="address['challenges'].errors?.['required']" class="error-text" >Primary challenge of businesss is required</div>
+                        </div>
                       </div>
                   <div class="inputChallenges"  *ngIf="businessIndivual.get('challenges')?.value === 'other'">
-                      <input class="matFormInput" formControlName="otherChallenges" type="text">
+                      <input class="matFormInput" formControlName="otherChallenges" [ngClass]="{ 'error-border': businessIndividual_step && businessIndivual.controls['otherChallenges'].errors }">
+                      <!-- <div *ngIf="businessIndividual_step && businessIndivual.controls['otherChallenges'].errors">
+                        <div *ngIf="address['otherChallenges'].errors?.['required']" class="error-text" >Other challenge of businesss is required</div>
+                    </div> -->
                   </div>
               </div>
-          
-          
-          
+
+
+
               <div class="biasharaStimulusProgramme">
                   <h4 class="fs-subtitle radio-button-title">Are you aware of Nairobi City County Biashara Stimulus
                       Program?</h4>
@@ -263,8 +330,11 @@
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['awareofProgram'].errors">
+                    <div *ngIf="address['awareofProgram'].errors?.['required']" class="error-text" >Awareness status of Nairobi City County Biashara Stimulus is required</div>
+                </div>
               </div>
-          
+
               <div class="sourceOfCapital">
                   <h4 class="fs-subtitle radio-button-title">What is your source of capital?</h4>
                   <mat-radio-group formControlName="sourceofCapital" class="radio-group-options" aria-label="Select an option">
@@ -273,8 +343,11 @@
                       <mat-radio-button value="Chama">Chama</mat-radio-button>
                       <mat-radio-button value="Loan">Loan</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['sourceofCapital'].errors">
+                    <div *ngIf="address['sourceofCapital'].errors?.['required']" class="error-text" >Source of capital is required</div>
+                </div>
               </div>
-          
+
               <div class="capitalAdequate">
                   <h4 class="fs-subtitle radio-button-title">Is the capital adequate for expansion for your business?
                   </h4>
@@ -282,8 +355,11 @@
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['capitalisAdequate'].errors">
+                    <div *ngIf="address['capitalisAdequate'].errors?.['required']" class="error-text" >Capital adequacy is required</div>
+                </div>
               </div>
-          
+
               <div class="marketProducts">
                   <h4 class="fs-subtitle radio-button-title">How do you market your products?</h4>
                   <mat-radio-group formControlName="marketingProducts" class="radio-group-options" aria-label="Select an option">
@@ -291,16 +367,22 @@
                       <mat-radio-button value="physical">Physical</mat-radio-button>
                       <mat-radio-button value="both">Both</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['marketingProducts'].errors">
+                    <div *ngIf="address['marketingProducts'].errors?.['required']" class="error-text" >Form of marketing products is required</div>
+                </div>
               </div>
-          
+
               <div class="targetMarkets">
                   <h4 class="fs-subtitle radio-button-title">What are your target markets?</h4>
                   <mat-radio-group formControlName="targetMarket" class="radio-group-options" aria-label="Select an option">
                       <mat-radio-button value="local">Local</mat-radio-button>
                       <mat-radio-button value="international">International</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['targetMarket'].errors">
+                    <div *ngIf="address['targetMarket'].errors?.['required']" class="error-text" >Target market is required</div>
+                </div>
               </div>
-          
+
               <div class="tradeExhibition">
                   <h4 class="fs-subtitle radio-button-title">Have you participated in any trade fair/exhibition?</h4>
                   <mat-radio-group formControlName="participatedintradefair" class="radio-group-options"
@@ -308,6 +390,9 @@
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['participatedintradefair'].errors">
+                    <div *ngIf="address['participatedintradefair'].errors?.['required']" class="error-text" >Whether you participated in trade fair/exhibition is required</div>
+                </div>
 
                   <div class="participated" *ngIf="businessIndivual.get('participatedintradefair')?.value === 'yes'">
                       <h4 class="fs-subtitle radio-button-title">If yes:</h4>
@@ -316,10 +401,13 @@
                           <mat-radio-button value="self-sponsored">Self-sponsored</mat-radio-button>
                           <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
                       </mat-radio-group>
+                      <!-- <div *ngIf="businessIndividual_step && businessIndivual.controls['tradefairParticipation'].errors">
+                        <div *ngIf="address['tradefairParticipation'].errors?.['required']" class="error-text" >Nature of trade fair/exhibition funding is required</div>
+                    </div> -->
                   </div>
-                 
+
               </div>
-          
+
               <div class="capacityBuildingTraining">
                   <h4 class="fs-subtitle radio-button-title">Have you participated in any capacity building training?</h4>
                   <mat-radio-group formControlName="capacityBuildingTraining" class="radio-group-options"
@@ -327,6 +415,9 @@
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessIndividual_step && businessIndivual.controls['capacityBuildingTraining'].errors">
+                    <div *ngIf="address['capacityBuildingTraining'].errors?.['required']" class="error-text" >Whether you participated in capacity building is required</div>
+                </div>
 
                   <div class="capacitybuilding" *ngIf="businessIndivual.get('capacityBuildingTraining')?.value === 'yes'" >
                       <h4 class="fs-subtitle radio-button-title">If yes:</h4>
@@ -336,12 +427,12 @@
                           <mat-radio-button value="sponsored">Sponsored</mat-radio-button>
                       </mat-radio-group>
                   </div>
-                 
+
               </div>
-          
+
               <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
               <input  (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
-          
+
           </fieldset>
           </form>
 
@@ -357,6 +448,9 @@
                       <mat-radio-button value="yes">Yes</mat-radio-button>
                       <mat-radio-button value="no">No</mat-radio-button>
                   </mat-radio-group>
+                  <div *ngIf="businessGroup_step && businessGroup.controls['isGroupRegistered'].errors">
+                    <div *ngIf="membership['isGroupRegistered'].errors?.['required']" class="error-text" >Whether you are registered to a common interest group/organization is required</div>
+                </div>
 
                   <input formControlName="groupName" type="text" placeholder="Group/Organization name">
                   <input formControlName="year_registered" type="text" placeholder="Year of registration">
@@ -365,7 +459,7 @@
 
                   <div>
                       <h4 class="fs-subtitle radio-button-title">Upload the list of the members</h4>
-                      <input formControlName="listOfGroupmembers" type="file" class="file-upload" (change)="handleFileupload($event,'listOfGroupmembers')"> 
+                      <input formControlName="listOfGroupmembers" type="file" class="file-upload" (change)="handleFileupload($event,'listOfGroupmembers')">
                   </div>
 
                   <div>
@@ -407,6 +501,9 @@
               <ng-select formControlName="expectations" [multiple]="true" [closeOnSelect]="false" [searchable]="true"  (change)="onExpectationChange($event)" placeholder="Select business outcome">
                   <ng-option *ngFor="let option of businessOutcomeOptions" [value]="option.id">{{ option.name }}</ng-option>
               </ng-select>
+              <div *ngIf="businessGroup_step && businessGroup.controls['expectations'].errors">
+                <div *ngIf="membership['expectations'].errors?.['required']" class="error-text" >Positive outcomes/expectations required</div>
+            </div>
                       <!--end of checkboxes business outcome -->
                   </div>
                   <div class="matFormInput" *ngIf="showOtherOutcomeInputs">
@@ -419,11 +516,11 @@
                   <h4 class="fs-subtitle radio-button-title">Do you have any additional comments, suggestions, or concerns regarding Biashara Stimulus program?</h4>
                   <textarea formControlName="comments" name="" id="" cols="10" rows="5"></textarea>
               </div>
-                  
-          
 
 
-              
+
+
+
           <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
           <input (click)="onSubmit()" type="submit" name="submit" class="submit action-submit" value="Submit"/>
 

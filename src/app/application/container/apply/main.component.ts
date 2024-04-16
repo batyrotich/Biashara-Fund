@@ -36,13 +36,13 @@ export class ApplicationComponent implements OnInit {
       password: new FormControl('',),
     });
   }
-  
+
   showPassword() {
     this.passwordFieldType = !this.passwordFieldType;
   }
 
   current_year(){
-    var date = new Date();  
+    var date = new Date();
     return date.getFullYear();
   }
 
@@ -273,53 +273,54 @@ export class ApplicationComponent implements OnInit {
     { id: 'otherThingsExpected', name: 'Other:' },
   ]
 
- 
-  
+
+
   ngOnInit(){
 
     this.personalDetails =this.formBuilder.group({
-      fullName: ['', Validators.required, Validators.minLength(5)],
-      identificationNumber:['', Validators.required],
-      gender:['','True', Validators.required],
-      other_gender:['', Validators.required],
-      disabilityStatus:['', 'True',Validators.required],
-      email:['', Validators.required],
-      phoneNumber:['', Validators.required],
-      passportPhoto:['', Validators.required],
-      nationalIDPhoto:['', Validators.required],
+      fullName: ['',Validators.required],
+      identificationNumber:['',Validators.required],
+      gender:['',Validators.required ],
+      other_gender:['',],
+      disabilityStatus:['',Validators.required],
+      email:['',Validators.email],
+      phoneNumber:['',Validators.required],
+      passportPhoto:['',Validators.required],
+      nationalIDPhoto:['',Validators.required],
     });
 
     this.personalDetails.get('gender')?.valueChanges.subscribe(value=>{
       if (value !== 'other') {
         this.personalDetails.get('other_gender')?.setValue('');
+          console.log('Personal Details:', this.personalDetails.value);
       }
     });
 
     this.businessIndivual=this.formBuilder.group({
-      businessName:['', Validators.required],
-      isbusinessRegistered:['', Validators.required],
+      businessName:['',Validators.required],
+      isbusinessRegistered:['',Validators.required],
       registrationCertificate:null,
-      explainWhy:['', Validators.required],
-      subcounty:['', Validators.required],
-      ward:['', Validators.required],
-      building:['', Validators.required],
-      street:['', Validators.required],
-      landmark:['', Validators.required],
-      businessSector:['', Validators.required],
-      natureofBusiness:['', Validators.required],
-      numbofEmployees:['', Validators.required],
-      lengthofOperations:['', Validators.required],
-      challenges:['', Validators.required],
-      otherChallenges:['', Validators.required],
-      awareofProgram:['', Validators.required],
-      sourceofCapital:['', Validators.required],
-      capitalisAdequate:['', Validators.required],
-      marketingProducts:['', Validators.required],
-      targetMarket:['', Validators.required],
+      explainWhy:['',],
+      subcounty:[null,Validators.required],
+      ward:[null,Validators.required],
+      building:['',Validators.required],
+      street:['',Validators.required],
+      landmark:['',Validators.required],
+      businessSector:['',Validators.required],
+      natureofBusiness:['',Validators.required],
+      numbofEmployees:['',Validators.required],
+      lengthofOperations:['',Validators.required],
+      challenges:['',Validators.required],
+      otherChallenges:['',],
+      awareofProgram:['',Validators.required],
+      sourceofCapital:['',Validators.required],
+      capitalisAdequate:['',Validators.required],
+      marketingProducts:['',Validators.required],
+      targetMarket:['',Validators.required],
       participatedintradefair:['',Validators.required],
-      tradefairParticipation:['', Validators.required],
-      capacityBuildingTraining:['', Validators.required],
-      capacityTrainingParticipation:['', Validators.required]
+      tradefairParticipation:['',],
+      capacityBuildingTraining:['',Validators.required],
+      capacityTrainingParticipation:['',]
     });
 
 
@@ -353,12 +354,12 @@ export class ApplicationComponent implements OnInit {
 
 
     this.businessGroup=this.formBuilder.group({
-      isGroupRegistered:['', Validators.required],
-      groupName:['', Validators.required],
-      year_registered:['', Validators.required],
-      chairpersonsContact:['', Validators.required],
-      numberofGroupmemb:['', Validators.required],
-      listOfGroupmembers:['', Validators.required],
+      isGroupRegistered:['',Validators.required],
+      groupName:['',],
+      year_registered:['',],
+      chairpersonsContact:['',],
+      numberofGroupmemb:['',],
+      listOfGroupmembers:['',],
       groupConsitution:null,
       groupRegCert:null,
 
@@ -371,7 +372,7 @@ export class ApplicationComponent implements OnInit {
       comments:['',],
 
     })
-  
+
   }
 
   onExpectationChange(selectedValues: any[]) {
@@ -408,15 +409,22 @@ export class ApplicationComponent implements OnInit {
 next(){
   if (this.step == 1) {
     this.personal_step = true;
-    // if (this.personalDetails.invalid) {
-    //   return;
-    // }
+    if (this.personalDetails.invalid) {
+      return;
+    }
     this.step++;
-  }else if(this.step ==2){
+  }
+  else if(this.step ==2){
     this.businessIndividual_step=true;
+    // this.step++;
+    if (this.businessIndivual.invalid) {
+      return;
+    }
     this.step++;
-  }else{
+  }
+    else{
     this.businessGroup_step =true;
+
   }
 }
 
@@ -464,7 +472,7 @@ previous(){
     });
 
 
- 
+
     // console.log('Business (Individual):', this.businessIndivual.value);
     // console.log('Business (Group/Organization):', this.businessGroup.value);
     // console.log('Personal Details:', this.personalDetails.value);
